@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>JS Drum Kit</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
+
 <body>
 
-
+  <!-- 鍵盤的KeyCode https://www.toptal.com/developers/keycode -->
   <div class="keys">
     <div data-key="65" class="key">
       <kbd>A</kbd>
@@ -58,10 +60,43 @@
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
-<script>
+  <script>
 
-</script>
+    function playSound(e) {
+      // console.log(e);
+      // console.log(e.keyCode);
+      // 接下來抓<audio></audio> 的data-key 值帶入 e.keyCode，並播放對應的聲音
+      const sound = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+      const addStyle = document.querySelector(`div[data-key="${e.keyCode}"]`);
+      if (!sound) return; // 如果<audio></audio> 的data-key 值，就返回。
+      sound.currentTime = 0; // 重置聲音的時間到0。 
+      sound.play();// 播放成功。
+      // console.log(addStyle);
+      addStyle.classList.add('playing'); // 加上CSS 效果 .playing。
+    };
+
+    function removeTransition(e) {
+      // console.log(e); 這時會看到6個console, 但我們只要transform
+      // 所以要用if()來決定只要遇到e.propertyName=""不是transform，就return。
+      if (e.propertyName !== 'transform') return;
+      // console.log(e.propertyName);
+      // console.log(this);
+      // this => const addStyle = document.querySelector(`div[data-key="${e.keyCode}"]`);
+      this.classList.remove('playing');
+    };
+
+
+    // 接下來把加上的 .playing 的 transition 移除
+    const allKeys = document.querySelectorAll('.key'); // 選取所有的鍵盤按鈕。
+    // console.log(allKeys);
+    // 利用 foreach 迴圈，移除 .playing 的 transition 效果。
+    allKeys.forEach(addStyle => addStyle.addEventListener('transitionend', removeTransition));
+
+
+    window.addEventListener('keydown', playSound);
+  </script>
 
 
 </body>
+
 </html>
