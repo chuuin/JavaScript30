@@ -16,6 +16,7 @@
       <div class="hand min-hand"></div>
       <div class="hand second-hand"></div>
     </div>
+    <div class="ele-clock"></div>
   </div>
 
 
@@ -64,16 +65,41 @@
     }
 
     .hand {
-      width: 50%;
       height: 6px;
-      background: black;
       position: absolute;
       top: 50%;
+      right: 50%;
       /* 設定 transform 的原點 */
       transform-origin: 100%;
       /* 旋轉90度 */
       transform: rotate(90deg);
 
+    }
+
+    .second-hand {
+      width: 50%;
+      background: rgb(76, 101, 101);
+    }
+
+    .min-hand {
+      width: 40%;
+      background: rgb(90, 76, 101);
+    }
+
+    .hour-hand {
+      width: 30%;
+      background: rgb(83, 105, 73);
+
+    }
+
+    .ele-clock {
+      width: 50%;
+      height: 20%;
+      color: black;
+      font-size: 2.5rem;
+      position: absolute;
+      top: 70%;
+      left: 60px;
     }
   </style>
 
@@ -82,6 +108,7 @@
     const secondHand = document.querySelector('.second-hand'); //秒針
     const minHand = document.querySelector('.min-hand'); // 分針
     const hourHand = document.querySelector('.hour-hand'); // 時針
+    const eleClock = document.querySelector('.ele-clock');
 
 
     function setDate() {
@@ -102,6 +129,8 @@
       const hour = now.getHours(); // console.log(hour);  確認出現小時數
       const hourDeg = ((hour / 12) * 360) + ((minute / 60) * 30) + 90; // 轉換小時數為角度值
       hourHand.style.transform = `rotate(${hourDeg}deg)`; // 設定時針角度值
+
+      eleClock.innerHTML = `${hour}:${minute}:${second}`; // 顯示時間
     }
 
 
