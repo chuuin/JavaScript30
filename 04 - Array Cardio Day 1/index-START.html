@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Array Cardio 💪</title>
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
+
 <body>
   <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
   <script>
     // Get your shorts on - this is an array workout!
     // ## Array Cardio Day 1
-
     // Some data we can work with
+
 
     const inventors = [
       { first: 'Albert', last: 'Einstein', year: 1879, passed: 1955 },
@@ -35,32 +37,45 @@
       'Berne, Eric', 'Berra, Yogi', 'Berry, Wendell', 'Bevan, Aneurin', 'Ben-Gurion, David', 'Bevel, Ken', 'Biden, Joseph', 'Bennington, Chester', 'Bierce, Ambrose',
       'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
     ];
-    
+
     // Array.prototype.filter()
-    // 1. Filter the list of inventors for those who were born in the 1500's
+    // 1. Filter the list of inventors for those who were born in the 1500's 篩選出生於 1500 年代的發明家名單
+    const filterYears = inventors.filter(born => born.year >= 1500 && born.year <= 1599);
+    console.table(filterYears);
 
     // Array.prototype.map()
-    // 2. Give us an array of the inventors first and last names
+    // 2. Give us an array of the inventors first and last names 給我們一個包含發明者名字和姓氏的陣列
+    const fullNames = inventors.map(name => `${name.first} ${name.last}`);
+    console.log(fullNames);
 
     // Array.prototype.sort()
-    // 3. Sort the inventors by birthdate, oldest to youngest
+    // 3. Sort the inventors by birthdate, oldest to youngest 依出生日期從大到小對發明者進行排序
+    const sortBirthdate = inventors.sort((a, b) => a.year - b.year);
+    console.table(sortBirthdate);
 
     // Array.prototype.reduce()
-    // 4. How many years did all the inventors live all together?
+    // 4. How many years did all the inventors live all together? 所有發明家總共生活了幾年？
+    const totalYears = inventors.reduce((c, d) => c + (d.passed - d.year), 0);
+    console.log(`所有發明家總共生活了${totalYears}年`);
 
-    // 5. Sort the inventors by years lived
+    // 5. Sort the inventors by years lived 依生存年限對發明家進行排序
+    const sortLive = inventors.sort((e, f) => (e.passed - e.year) > (f.passed - f.year) ? -1 : 1);
+    console.table(sortLive);
 
-    // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
-    // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    // 7. sort Exercise sort練習
+    // Sort the people alphabetically by last name 按姓氏字母順序對人員進行排序
+    const sortPeople = people.sort((g, h) => g.split(', ') > h.split(', ') ? 1 : -1);
+    console.log(sortPeople);
 
+    // 8. Reduce Exercise Reduce 練習
+    // Sum up the instances of each of these 總結以下每個例子
+    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck'];
 
-    // 7. sort Exercise
-    // Sort the people alphabetically by last name
-
-    // 8. Reduce Exercise
-    // Sum up the instances of each of these
-    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const count = data.reduce((acc, item) => ((acc[item] = (acc[item] || 0) + 1), acc), {});
+    // acc 是累加的結果（物件 {}）。 每看到一個 item，就在 acc 裡加一個計數。acc[item] || 0：若還沒記錄過，就從 0 開始。
+    console.log(count);
 
   </script>
 </body>
+
 </html>
