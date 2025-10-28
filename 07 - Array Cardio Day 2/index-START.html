@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Array Cardio 💪💪</title>
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
+
 <body>
   <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
   <script>
@@ -26,17 +28,64 @@
     ];
 
     // Some and Every Checks
-    // Array.prototype.some() // is at least one person 19 or older?
-    // Array.prototype.every() // is everyone 19 or older?
+    // Array.prototype.some() // is at least one person 19 or older? 至少有一人年滿 19 歲嗎？
+    // const isAdult = people.some(function (person) {
+    //   const currentYear = (new Date()).getFullYear();
+    //   if (currentYear - person.year >= 19) {
+    //     return true;
+    //   }
+    // });
+
+    // 上述精簡化
+
+    const isAdult = people.some(person => {
+      return ((new Date()).getFullYear()) - person.year >= 19;
+    });
+
+    console.log(isAdult);
+
+
+
+    // Array.prototype.every() // is everyone 19 or older? 每個人都年滿 19 歲嗎？
+
+    const allAdult = people.every(person => {
+      return ((new Date()).getFullYear()) - person.year >= 19;
+    });
+    console.log(allAdult);
 
     // Array.prototype.find()
-    // Find is like filter, but instead returns just the one you are looking for
-    // find the comment with the ID of 823423
+    // Find is like filter, but instead returns just the one you are looking for 尋找類似於過濾器，但只返回您要找的那個
+    // find the comment with the ID of 823423 找到 ID 為 823423 的評論
+    // const comment = comments.find(function (comment) {
+    //   if (comment.id === 823423) { return true; }
+    // });
+
+    // 上述精簡化
+    const comment = comments.find(e => e.id === 823423);
+    console.log(comment);
+
 
     // Array.prototype.findIndex()
-    // Find the comment with this ID
-    // delete the comment with the ID of 823423
+    // Find the comment with this ID 尋找具有此 ID 的評論
+    // delete the comment with the ID of 823423 刪除 ID 為 823423 的評論
+
+    const index = comments.findIndex(i => i.id === 823423);
+    // console.log(index);
+
+    // comments.splice(index, 1);
+    console.table(comments);
+
+
+
+
+    // 另一種方法
+    const newComments = [
+      ...comments.slice(0, index),
+      ...comments.slice(index + 1)
+    ];
+    console.table(newComments);
 
   </script>
 </body>
+
 </html>
